@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+
+{% block title %}SpeechFlow - Transform Your Speech Therapy{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>Transform Your Speech Therapy Journey</h1>
+        <p>Experience personalized speech therapy exercises powered by AI technology. Track your progress, improve your communication skills, and achieve your speech goals faster than ever before.</p>
+        
+        <div class="hero-features">
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <span>Track Progress</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-brain"></i>
+                <span>AI-Powered</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Mobile Ready</span>
+            </div>
+        </div>
+        
+        <div class="hero-actions">
+            <a href="{{ url_for('session_flow') }}" class="btn btn-primary btn-large">
+                <i class="fas fa-play"></i>
+                Start Your Journey
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <h2>Why Choose SpeechFlow?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-microphone-alt"></i>
+                </div>
+                <h3>Personalized Exercises</h3>
+                <p>Choose from a variety of speech exercises tailored to your specific needs and goals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor your improvement with detailed analytics and performance metrics.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Flexible Scheduling</h3>
+                <p>Practice at your own pace with customizable session schedules.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature i {
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.features-section {
+    padding: 4rem 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin-top: 4rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.features-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 3rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.feature-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .hero {
+        padding: 2rem 1rem;
+        margin: 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .feature {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+    
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+    
+    .features-section {
+        padding: 2rem 0;
+        margin-top: 2rem;
+    }
+    
+    .features-section h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 1.5rem 0.5rem;
+        margin: 0.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    .feature {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .feature i {
+        font-size: 1rem;
+    }
+    
+    .features-section h2 {
+        font-size: 1.75rem;
+    }
+    
+    .feature-card {
+        padding: 1rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .feature-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.25rem;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,402 @@
+{% extends "base.html" %}
+
+{% block title %}Set Your Goal - SpeechFlow{% endblock %}
+
+{% block content %}
+<div class="goal-selection-page">
+    <div class="goal-header">
+        <h1>Set Your Practice Goal</h1>
+        <p>Choose how much time you'd like to dedicate to speech therapy practice</p>
+    </div>
+
+    <div class="goal-container">
+        <div class="goal-options">
+            <div class="goal-option" onclick="selectGoal('5 minutes')">
+                <div class="goal-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>5 Minutes Daily</h3>
+                <div class="improvement-preview">
+                    <div class="improvement-chart">
+                        <canvas id="chart5min"></canvas>
+                    </div>
+                    <div class="improvement-stats">
+                        <div class="stat">
+                            <span class="stat-value">+25%</span>
+                            <span class="stat-label">in 4 weeks</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">+40%</span>
+                            <span class="stat-label">in 8 weeks</span>
+                        </div>
+                    </div>
+                </div>
+                <p>Perfect for busy schedules. Small daily practice leads to steady improvement.</p>
+            </div>
+
+            <div class="goal-option" onclick="selectGoal('15 minutes')">
+                <div class="goal-icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <h3>15 Minutes Daily</h3>
+                <div class="improvement-preview">
+                    <div class="improvement-chart">
+                        <canvas id="chart15min"></canvas>
+                    </div>
+                    <div class="improvement-stats">
+                        <div class="stat">
+                            <span class="stat-value">+45%</span>
+                            <span class="stat-label">in 4 weeks</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">+70%</span>
+                            <span class="stat-label">in 8 weeks</span>
+                        </div>
+                    </div>
+                </div>
+                <p>Recommended for most users. Balanced practice for optimal results.</p>
+            </div>
+
+            <div class="goal-option" onclick="selectGoal('30 minutes')">
+                <div class="goal-icon">
+                    <i class="fas fa-hourglass-half"></i>
+                </div>
+                <h3>30 Minutes Daily</h3>
+                <div class="improvement-preview">
+                    <div class="improvement-chart">
+                        <canvas id="chart30min"></canvas>
+                    </div>
+                    <div class="improvement-stats">
+                        <div class="stat">
+                            <span class="stat-value">+65%</span>
+                            <span class="stat-label">in 4 weeks</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">+90%</span>
+                            <span class="stat-label">in 8 weeks</span>
+                        </div>
+                    </div>
+                </div>
+                <p>For dedicated users. Maximum improvement in shortest time.</p>
+            </div>
+        </div>
+
+        <div class="goal-info">
+            <div class="info-card">
+                <h3>Why Set a Goal?</h3>
+                <p>Setting a practice goal helps you stay consistent and track your progress. Users who set goals are 3x more likely to achieve significant improvement.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function selectGoal(goal) {
+    // Send goal selection to server
+    fetch('/goal-selection', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'goal=' + encodeURIComponent(goal)
+    }).then(() => {
+        window.location.href = '/home';
+    });
+}
+
+// Initialize charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // 5 minutes chart
+    new Chart(document.getElementById('chart5min').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [{
+                label: 'Progress',
+                data: [60, 68, 75, 85],
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, max: 100, display: false },
+                x: { display: false }
+            }
+        }
+    });
+
+    // 15 minutes chart
+    new Chart(document.getElementById('chart15min').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [{
+                label: 'Progress',
+                data: [60, 75, 85, 105],
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, max: 100, display: false },
+                x: { display: false }
+            }
+        }
+    });
+
+    // 30 minutes chart
+    new Chart(document.getElementById('chart30min').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [{
+                label: 'Progress',
+                data: [60, 80, 95, 125],
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, max: 100, display: false },
+                x: { display: false }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.goal-selection-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.goal-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.goal-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goal-header p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.goal-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.goal-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.goal-option {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.goal-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+}
+
+.goal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.goal-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.goal-option h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 1.5rem;
+}
+
+.improvement-preview {
+    margin-bottom: 1.5rem;
+}
+
+.improvement-chart {
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.improvement-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #4a5568;
+}
+
+.goal-option p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.goal-info {
+    position: sticky;
+    top: 100px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 1rem;
+}
+
+.info-card p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .goal-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .goal-info {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .goal-selection-page {
+        padding: 0 1rem;
+    }
+    
+    .goal-header h1 {
+        font-size: 2rem;
+    }
+    
+    .goal-header p {
+        font-size: 1rem;
+    }
+    
+    .goal-options {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .goal-option {
+        padding: 1.5rem;
+    }
+    
+    .goal-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .goal-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .goal-option h3 {
+        font-size: 1.25rem;
+    }
+    
+    .improvement-chart {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .goal-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .goal-option {
+        padding: 1rem;
+    }
+    
+    .improvement-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+</style>
+{% endblock %} 
